@@ -97,7 +97,7 @@ import axios from 'axios';
               <p>Required</p>
             </div>
             <label>
-              <select name='size-dropdown' value={size} onChange={handleSizeChange}>
+              <select id='size-dropdown' value={size} onChange={handleSizeChange}>
                 <option value=''>- Select an option -</option>
                 <option value='small'>- Small -</option>
                 <option value='medium'>- Medium -</option>
@@ -286,8 +286,8 @@ import axios from 'axios';
             <label>
               <input
                 type="text"
-                placeholder={'Any Thing Else to add?'}
-                name='name-input'
+                placeholder='Any Thing Else to add?'
+                name='special-text'
                 value={specialInstructions}
                 onChange={handleSpecialInstructionsChange}
               />
