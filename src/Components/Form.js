@@ -9,8 +9,13 @@ import axios from 'axios';
     const [substitute, setSubstitute] = useState(false);
     const [specialInstructions, setSpecialInstructions] = useState('');
     const [quantity, setQuantity] = useState(1);
+    const [name, setName] = useState('')
    
     const navigate = useNavigate();
+
+    const handleNameChange = (event) => {
+      setName(event.target.value)
+    }
   
     const handleSizeChange = (event) => {
       setSize(event.target.value);
@@ -86,6 +91,15 @@ import axios from 'axios';
   
     return (
       <form id="pizza-form" onSubmit={handleSubmit}>
+        <label>
+          <input
+          type='text'
+          id='name-input'
+          value=''
+          placeholder='Eneter Your Name'
+          onChange={handleNameChange}
+          />
+        </label>
         <div>
           <h1>Build Your Own Pizza</h1>
           <img href='' />
