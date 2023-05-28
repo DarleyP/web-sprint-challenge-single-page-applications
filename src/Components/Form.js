@@ -26,7 +26,7 @@ function OrderForm() {
   const handleNameChange = (event) => {
     const { value } = event.target;
     setName(value);
-    setNameError(!isTextValid(value, 2) ? 'Name must be at least 2 characters' : '');
+    setNameError(!isTextValid(value, 2) ? 'name must be at least 2 characters' : '');
   
   }
 
