@@ -10,7 +10,7 @@ function OrderForm() {
   const [specialInstructions, setSpecialInstructions] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState('')
-  const [nameError, setNameError] = useState('')
+  const [nameError, setNameError] = useState(false)
 
   const navigate = useNavigate();
 
@@ -21,12 +21,8 @@ function OrderForm() {
   const handleNameChange = (event) => {
     const { value } = event.target;
     setName(value);
-    if (value.length < 2) {
-      setNameError('Name must be at least 2 characters');
-    } else {
-      setNameError('');
-    }
-  };
+    setNameError(value.length < 2);
+  }
 
   const handleSizeChange = (event) => {
     setSize(event.target.value);
@@ -69,7 +65,7 @@ function OrderForm() {
     event.preventDefault();
 
     if (name.length < 2) {
-      setNameError('Name must be at least 2 characters');
+      setNameError(true);
       return;
     }
 
