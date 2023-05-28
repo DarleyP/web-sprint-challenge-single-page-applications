@@ -63,7 +63,7 @@ import axios from 'axios';
       };
   
       
-      axios.post('https://example.com/api/orders', data)
+      axios.post("https://reqres.in/api/orders", data)
         .then((response) => {
         
           console.log(response.data);
@@ -310,5 +310,4 @@ import axios from 'axios';
   }
   
   export default OrderForm;
-
 
