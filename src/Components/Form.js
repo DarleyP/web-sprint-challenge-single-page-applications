@@ -75,7 +75,7 @@ function OrderForm() {
             <p>Required</p>
           </div>
           <label>
-            <select name='#size-dropdown' value={size} onChange={handleSizeChange}>
+            <select name='size-dropdown' value={size} onChange={handleSizeChange}>
               <option value=''>- Select an option -</option>
               <option value='small'>- Small -</option>
               <option value='medium'>- Medium -</option>
