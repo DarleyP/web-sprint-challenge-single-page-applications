@@ -265,7 +265,7 @@ function OrderForm() {
             <input
               type="text"
               placeholder="Anything else to add?"
-              name='specialIn'
+              name='name-input'
               value={specialInstructions}
               onChange={handleSpecialInstructionsChange}
             />

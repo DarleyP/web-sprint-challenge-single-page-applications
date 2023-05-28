@@ -4,7 +4,7 @@ describe("test for sprint", () => {
     })
 
     const textTest = () => cy.get("input[name='specialIn']")
-    const pizzaTest = () => cy.get(`a[id="pressMe"]`)
+    const pizzaTest = () => cy.get(`a[id="order-pizza"]`)
     const toppingPep = () => cy.get("input[name=pepperoni]")
     const toppingbacon = () => cy.get("input[name=bacon]")
     const toppingextCheese = () => cy.get("input[name=extraCheese]")
