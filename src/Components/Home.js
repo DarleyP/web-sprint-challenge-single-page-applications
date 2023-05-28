@@ -6,7 +6,7 @@ export default function Home() {
             <div className="imgHome">
                 <div className="imgDiv">
                     <div className="pizzaDiv">
-                        <Link to='orderForm' id="pressMe">Pizza?</Link>
+                        <Link to='pizza' id="pressMe">Pizza?</Link>
                     </div>
                 </div>
             </div>
