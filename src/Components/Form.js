@@ -10,6 +10,8 @@ function OrderForm() {
   const [specialInstructions, setSpecialInstructions] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState('')
+  const [nameError, setNameError] = useState('')
+
 
 
   const navigate = useNavigate();
@@ -20,6 +22,8 @@ function OrderForm() {
 
   const handleNameChange = (event) => {
     const { value } = event.target;
+    setName(value);
+    setNameError('')
   
   }
 
@@ -63,7 +67,10 @@ function OrderForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-
+    if (name.length < 2) {
+      setNameError('Name must be at least 2 characters');
+      return;
+    }
 
     const data = {
       size,
@@ -77,7 +84,7 @@ function OrderForm() {
 
     try {
       const response = axios.post('https://reqres.in/api/orders', data);
-      console.log(response.data); // You can handle the response as needed
+      console.log(response.data); 
     } catch (error) {
       console.error(error);
     }
@@ -105,6 +112,7 @@ function OrderForm() {
           placeholder='Eneter Your Name'
           onChange={handleNameChange}
         />
+        {nameError && <span style={{ color: 'red' }}>{nameError}</span>}
       </label>
      
       <div>
