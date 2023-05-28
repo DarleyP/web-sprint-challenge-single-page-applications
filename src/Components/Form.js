@@ -10,13 +10,24 @@ import axios from 'axios';
     const [specialInstructions, setSpecialInstructions] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [name, setName] = useState('')
+    const [nameError, setNameError] = useState('')
    
     const navigate = useNavigate();
 
-    const handleNameChange = (event) => {
-      setName(event.target.value)
-    }
+    // const handleNameChange = (event) => {
+    //   setName(event.target.value)
+    // }
   
+    const handleNameChange = (event) => {
+      const { value } = event.target;
+      setName(value);
+      if (value.length < 2) {
+        setNameError('Name must be at least 2 characters');
+      } else {
+        setNameError('');
+      }
+    };
+
     const handleSizeChange = (event) => {
       setSize(event.target.value);
     };
@@ -57,6 +68,11 @@ import axios from 'axios';
     const handleSubmit = (event) => {
       event.preventDefault();
   
+      if (name.length < 2) {
+        setNameError('Name must be at least 2 characters');
+        return;
+      }
+
       const data = {
         size,
         sauce,
@@ -97,11 +113,12 @@ import axios from 'axios';
           <input
           type='text'
           id='name-input'
-          value=''
+          value={name}
           placeholder='Eneter Your Name'
           onChange={handleNameChange}
           />
         </label>
+        {nameError && <p>{nameError}</p>}
         <div>
           <h1>Build Your Own Pizza</h1>
           <img href='' />
