@@ -20,10 +20,13 @@ function OrderForm() {
   //   setName(event.target.value)
   // }
 
+  const isTextValid = (text, minLength) => {
+    return text.length >= minLength;
+  }
   const handleNameChange = (event) => {
     const { value } = event.target;
     setName(value);
-    setNameError('')
+    setNameError(!isTextValid(value, 2) ? 'Name must be at least 2 characters' : '');
   
   }
 
@@ -112,7 +115,7 @@ function OrderForm() {
           placeholder='Eneter Your Name'
           onChange={handleNameChange}
         />
-        {nameError && <span style={{ color: 'red' }}>{nameError}</span>}
+        {nameError && <span className="error">{nameError}</span>}
       </label>
      
       <div>
