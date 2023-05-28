@@ -64,6 +64,7 @@ import axios from 'axios';
         substitute,
         specialInstructions,
         quantity,
+        name,
         
       };
   
@@ -84,6 +85,7 @@ import axios from 'axios';
       setToppings([]);
       setSubstitute(false);
       setSpecialInstructions('');
+      setName('')
    
       navigate('/Conformation')
      
