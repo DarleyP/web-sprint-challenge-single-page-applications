@@ -10,7 +10,7 @@ function OrderForm() {
   const [specialInstructions, setSpecialInstructions] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState('')
-  const [nameError, setNameError] = useState(false)
+
 
   const navigate = useNavigate();
 
@@ -20,8 +20,7 @@ function OrderForm() {
 
   const handleNameChange = (event) => {
     const { value } = event.target;
-    setName(value);
-    setNameError(value.length < 2);
+  
   }
 
   const handleSizeChange = (event) => {
@@ -64,10 +63,7 @@ function OrderForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (name.length < 2) {
-      setNameError(true);
-      return;
-    }
+
 
     const data = {
       size,
@@ -77,19 +73,15 @@ function OrderForm() {
       specialInstructions,
       quantity,
       name,
-
     };
 
-
-    axios.post("https://reqres.in/api/orders", data)
-      .then((response) => {
-
-        console.log(response.data);
-      })
-      .catch((error) => {
-
-        console.error(error);
-      });
+    try {
+      const response = axios.post('https://reqres.in/api/orders', data);
+      console.log(response.data); // You can handle the response as needed
+    } catch (error) {
+      console.error(error);
+    }
+   
 
 
     setSize('');
@@ -114,9 +106,7 @@ function OrderForm() {
           onChange={handleNameChange}
         />
       </label>
-      {nameError && (
-        <span className="error-message">Name must be at least 2 characters</span>
-      )}
+     
       <div>
         <h1>Build Your Own Pizza</h1>
         <img href='' />
