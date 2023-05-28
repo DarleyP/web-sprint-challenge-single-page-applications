@@ -62,14 +62,14 @@ import axios from 'axios';
         
       };
   
-      // Send the POST request using Axios
+      
       axios.post('https://example.com/api/orders', data)
         .then((response) => {
-          // Handle the response if needed
+        
           console.log(response.data);
         })
         .catch((error) => {
-          // Handle the error if needed
+
           console.error(error);
         });
 
@@ -285,6 +285,7 @@ import axios from 'axios';
             <div><h3>Special Instructions</h3></div>
             <label>
               <input
+               id="special-text"
                 type="text"
                 placeholder='Any Thing Else to add?'
                 name='special-text'
