@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,11 +11,12 @@ function OrderForm() {
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState('')
   const [nameError, setNameError] = useState('')
-  const  [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
 
 
   const navigate = useNavigate();
+  let axiosCancelToken;
 
   // const handleNameChange = (event) => {
   //   setName(event.target.value)
@@ -28,8 +29,17 @@ function OrderForm() {
     const { value } = event.target;
     setName(value);
     setNameError(!isTextValid(value, 2) ? 'name must be at least 2 characters' : '');
-  
+
   }
+
+  useEffect(() => {
+    axiosCancelToken = axios.CancelToken.source();
+
+    return () => {
+      // Cleanup function to cancel any ongoing axios requests
+      axiosCancelToken.cancel();
+    };
+  }, []);
 
   const handleSizeChange = (event) => {
     setSize(event.target.value);
@@ -68,7 +78,7 @@ function OrderForm() {
     }
   };
 
-  const handleSubmit =  async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (name.length < 2) {
@@ -78,38 +88,38 @@ function OrderForm() {
 
     setIsLoading(true);
 
-  try {
-    const payload = {
-      name: name,
-      size: size,
-      topping1: toppings.includes('pepperoni'),
-      topping2: toppings.includes('sausage'),
-      special: specialInstructions,
-    };
+    try {
+      const payload = {
+        name: name,
+        size: size,
+        topping1: toppings.includes('pepperoni'),
+        topping2: toppings.includes('sausage'),
+        special: specialInstructions,
+      };
 
-    const response = await axios.post('https://reqres.in/api/orders', payload);
+      const response = await axios.post('https://reqres.in/api/orders', payload);
 
-    console.log(response.data);
-
-    
-
-    
+      console.log(response.data);
 
 
-    setSize('');
-    setSauce('');
-    setToppings([]);
-    setSubstitute(false);
-    setSpecialInstructions('');
-    setName('')
 
-    navigate('/Conformation');
-  } catch (error) {
-    console.log(error);
-    // Handle error here
-  } finally {
-    setIsLoading(false);
-  }
+
+
+
+      setSize('');
+      setSauce('');
+      setToppings([]);
+      setSubstitute(false);
+      setSpecialInstructions('');
+      setName('')
+
+      navigate('/Conformation');
+    } catch (error) {
+      console.log(error);
+
+    } finally {
+      setIsLoading(false);
+    }
 
   };
 
@@ -125,7 +135,7 @@ function OrderForm() {
         />
         {nameError && <span className="error">{nameError}</span>}
       </label>
-     
+
       <div>
         <h1>Build Your Own Pizza</h1>
         <img href='' />
