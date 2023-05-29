@@ -115,8 +115,12 @@ function OrderForm() {
 
       navigate('/Conformation');
     } catch (error) {
-      console.log(error);
-
+      if (axios.isCancel(error)) {
+        console.log('Request canceled:', error.message);
+      } else {
+        console.log(error);
+      
+      }
     } finally {
       setIsLoading(false);
     }
