@@ -11,7 +11,7 @@ function OrderForm() {
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState('')
   const [nameError, setNameError] = useState('')
-  
+  const  [isLoading, setIsLoading] = useState(false)
 
 
 
@@ -76,26 +76,24 @@ function OrderForm() {
       return;
     }
 
-    event.preventDefault();
+    setIsLoading(true);
 
-    const requestData = {
-      size,
-      sauce,
-      toppings,
-      substitute,
-      specialInstructions,
-      quantity,
-      name
+  try {
+    const payload = {
+      name: name,
+      size: size,
+      topping1: toppings.includes('pepperoni'),
+      topping2: toppings.includes('sausage'),
+      special: specialInstructions,
     };
 
-    axios
-      .post(`https://reqres.in/api/orders`, requestData)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const response = await axios.post('https://reqres.in/api/orders', payload);
+
+    console.log(response.data);
+
+    
+
+    
 
 
     setSize('');
@@ -105,7 +103,13 @@ function OrderForm() {
     setSpecialInstructions('');
     setName('')
 
-    navigate('/Conformation')
+    navigate('/Conformation');
+  } catch (error) {
+    console.log(error);
+    // Handle error here
+  } finally {
+    setIsLoading(false);
+  }
 
   };
 
@@ -346,4 +350,3 @@ function OrderForm() {
 }
 
 export default OrderForm;
-
