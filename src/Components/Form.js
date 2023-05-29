@@ -16,14 +16,7 @@ function OrderForm() {
 
 
   const navigate = useNavigate();
-  let source = axios.Cancel.Token.source;
-
-  useEffect(() => {
-    return () => {
-      
-      source.cancel('Component is unmounting');
-    };
-  }, []);
+  let axiosCancelToken;
 
   // const handleNameChange = (event) => {
   //   setName(event.target.value)
@@ -39,7 +32,14 @@ function OrderForm() {
 
   }
 
- 
+  useEffect(() => {
+    axiosCancelToken = axios.CancelToken.source();
+
+    return () => {
+      // Cleanup function to cancel any ongoing axios requests
+      axiosCancelToken.cancel();
+    };
+  }, []);
 
   const handleSizeChange = (event) => {
     setSize(event.target.value);
