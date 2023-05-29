@@ -16,7 +16,14 @@ function OrderForm() {
 
 
   const navigate = useNavigate();
-  let axiosCancelToken;
+  let source = axios.Cancel.Token.source;
+
+  useEffect(() => {
+    return () => {
+      
+      source.cancel('Component is unmounting');
+    };
+  }, []);
 
   // const handleNameChange = (event) => {
   //   setName(event.target.value)
@@ -32,14 +39,7 @@ function OrderForm() {
 
   }
 
-  useEffect(() => {
-    axiosCancelToken = axios.CancelToken.source();
-
-    return () => {
-      // Cleanup function to cancel any ongoing axios requests
-      axiosCancelToken.cancel();
-    };
-  }, []);
+ 
 
   const handleSizeChange = (event) => {
     setSize(event.target.value);
@@ -358,7 +358,7 @@ function OrderForm() {
           Increase
         </button>
       </div>
-      <button type="submit" id='submitPizza'>Submit</button>
+      <button type="submit" id='order-button'>Add to Order</button>
     </form>
   );
 }
