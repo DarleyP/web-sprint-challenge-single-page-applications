@@ -11,6 +11,7 @@ function OrderForm() {
   const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState('')
   const [nameError, setNameError] = useState('')
+  
 
 
 
@@ -67,7 +68,7 @@ function OrderForm() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit =  async(event) => {
     event.preventDefault();
 
     if (name.length < 2) {
@@ -75,23 +76,26 @@ function OrderForm() {
       return;
     }
 
-    const data = {
+    event.preventDefault();
+
+    const requestData = {
       size,
       sauce,
       toppings,
       substitute,
       specialInstructions,
       quantity,
-      name,
+      name
     };
 
-    try {
-      const response = axios.post('https://reqres.in/api/orders', data);
-      console.log(response.data); 
-    } catch (error) {
-      console.error(error);
-    }
-   
+    axios
+      .post(`https://reqres.in/api/orders`, requestData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
 
     setSize('');
